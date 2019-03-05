@@ -1,0 +1,23 @@
+1. CREATE DATABASE call_list;
+2. CREATE TABLE users (id SERIAL PRIMARY KEY, firs_name VARCHAR(64), email VARCHAR(64));
+3. INSERT INTO users VALUES (1, 'Carlos','carlos@gmail.com');
+4. INSERT INTO users VALUES (2, 'Laura','laura@gmail.com');
+5. CREATE TABLE calls (id SERIAL PRIMARY KEY, phone VARCHAR(15), date DATE, user_id INTEGER REFERENCES users(id));
+6. ALTER TABLE users ADD COLUMN last_name varchar(64);
+7. UPDATE users SET last_name = 'Perez' WHERE id=1;
+8. UPDATE users SET last_name = 'Gomez' WHERE id=2;
+9. INSERT INTO calls VALUES (1,'+56983876868', '2018-01-20', 2); 
+   INSERT INTO calls VALUES (2,'+56983876868', '2018-02-20', 2);
+   INSERT INTO calls VALUES (3,'+56983876868', '2018-03-20', 2);
+   INSERT INTO calls VALUES (4,'+56983876868', '2018-04-20', 2);
+   INSERT INTO calls VALUES (5,'+56983876868', '2018-05-20', 2);
+   INSERT INTO calls VALUES (6,'+56983876868', '2018-06-20', 2);
+10.INSERT INTO calls VALUES (7,'+56985201548', '2018-01-10', 1);
+   INSERT INTO calls VALUES (8,'+56985201548', '2018-02-10', 1);
+   INSERT INTO calls VALUES (9,'+56985201548', '2018-03-10', 1);
+   INSERT INTO calls VALUES (10,'+56985201548', '2018-04-10', 1);
+11. INSERT INTO users VALUES (3, 'Juan', 'juan@gmail.com', 'Gonzalez');
+12. SELECT first_name, count (calls)  FROM users FULL JOIN calls ON (calls.user_id = users.id) group by first_name ;
+13. SELECT * FROM calls INNER JOIN users ON (users.first_name='Carlos') WHERE (calls.user_id = users.id) ORDER BY date ASC;
+14.  CREATE TABLE audit (id SERIAL PRIMARY KEY, reason VARCHAR(64), user_id INTEGER REFERENCES users (id));
+
